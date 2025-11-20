@@ -195,7 +195,7 @@ function scanURL() {
 async function lookupIP() {
     let ip = document.getElementById("ipInput").value;
 
-    let res = await fetch("http://localhost:5000/ipinfo", {
+    let res = await fetch("https://cybersecuritylab-9bqz.onrender.com/ipinfo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ip: ip })

@@ -83,7 +83,7 @@ button:hover {
 
 <script>
 async function loadLogs() {
-    let response = await fetch("http://localhost:5000/get_logs");
+    let response = await fetch("https://cybersecuritylab-9bqz.onrender.com/get_logs");
     let logs = await response.json();
 
     let table = document.getElementById("logTable");
@@ -95,7 +95,7 @@ async function loadLogs() {
             <th>EVENT</th>
         </tr>
     `;
-
+    
     logs.forEach(log => {
         table.innerHTML += `
             <tr>
@@ -109,7 +109,7 @@ async function loadLogs() {
 }
 
 async function clearLogs() {
-    await fetch("http://localhost:5000/clear_logs");
+    await fetch("https://cybersecuritylab-9bqz.onrender.com/clear_logs");
     loadLogs();
 }
 </script>

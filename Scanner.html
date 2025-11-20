@@ -96,13 +96,11 @@
             document.getElementById("result").innerHTML = "⏳ جاري الفحص...";
 
             try {
-                let response = await fetch("http://localhost:5000/ipinfo", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ target: target })
-                });
+                let res = await fetch("https://cybersecuritylab-9bqz.onrender.com/ipinfo", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ip: target })
+});
 
                 let data = await response.json();
 
