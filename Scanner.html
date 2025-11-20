@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerability Scanner</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+            color: #fff;
+        }
+
+        #bgVideo2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(0, 140, 255, 0.25);
+            backdrop-filter: blur(10px);
+            width: 380px;
+            padding: 25px;
+            margin: 120px auto;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,140,255,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #008cff;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0ab1ff;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- خلفية الفيديو -->
+    <video autoplay muted loop id="bgVideo2">
+    <source src="videos2/scanner-bg.mp4" type="video/mp4">
+</video>
+
+    <div class="container">
+        <h2>🔎 Vulnerability Scanner</h2>
+
+        <input type="text" id="target" placeholder="أدخل IP أو Domain">
+
+        <button onclick="runScan()">ابدأ الفحص</button>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        async function runScan() {
+            let target = document.getElementById("target").value;
+
+            if (!target) {
+                document.getElementById("result").innerHTML = "❗ الرجاء إدخال IP أو Domain";
+                return;
+            }
+
+            document.getElementById("result").innerHTML = "⏳ جاري الفحص...";
+
+            try {
+                let response = await fetch("http://localhost:5000/ipinfo", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ target: target })
+                });
+
+                let data = await response.json();
+
+                let output = "<br>🔍 النتائج:<br><br>";
+
+                for (let port in data) {
+                    let status = data[port];
+                    output += `Port ${port}: <b>${status}</b><br>`;
+                }
+
+                document.getElementById("result").innerHTML = output;
+            } 
+            catch (error) {
+                document.getElementById("result").innerHTML =
+                    "⚠️ لا يمكن الاتصال بالخادم (Python). تأكدي من تشغيل scanner.py";
+            }
+        }
+    </script>
+
+</body>
+</html>

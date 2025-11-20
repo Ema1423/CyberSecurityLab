@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Honeypot Attack Monitor</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    color: #fff;
+}
+
+/* الخلفية */
+#bgVideo4 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.container {
+    background: rgba(0, 140, 255, 0.2);
+    backdrop-filter: blur(10px);
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,140,255,0.4);
+}
+
+button {
+    background: #0099ff;
+    border: none;
+    padding: 12px 20px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+button:hover {
+    background: #33b0ff;
+}
+
+#logTable {
+    width: 100%;
+    margin-top: 25px;
+    border-collapse: collapse;
+}
+#logTable th, #logTable td {
+    border: 1px solid #fff;
+    padding: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- الخلفية -->
+<video autoplay muted loop id="bgVideo4">
+    <source src="videos2/scanner-bg.mp4" type="video/mp4">
+</video>
+
+<div class="container">
+    <h2>🛡 Honeypot Attack Monitor</h2>
+
+    <button onclick="loadLogs()">🔄 تحديث الهجمات</button>
+    <button onclick="clearLogs()">🧹 مسح الهجمات</button>
+
+    <table id="logTable">
+        <tr>
+            <th>IP</th>
+            <th>TIME</th>
+            <th>PORT</th>
+            <th>EVENT</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+async function loadLogs() {
+    let response = await fetch("http://localhost:5000/get_logs");
+    let logs = await response.json();
+
+    let table = document.getElementById("logTable");
+    table.innerHTML = `
+        <tr>
+            <th>IP</th>
+            <th>TIME</th>
+            <th>PORT</th>
+            <th>EVENT</th>
+        </tr>
+    `;
+
+    logs.forEach(log => {
+        table.innerHTML += `
+            <tr>
+                <td>${log.ip}</td>
+                <td>${log.time}</td>
+                <td>${log.port}</td>
+                <td>${log.event}</td>
+            </tr>
+        `;
+    });
+}
+
+async function clearLogs() {
+    await fetch("http://localhost:5000/clear_logs");
+    loadLogs();
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Tools Suite</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            font-family: Arial;
+            overflow-x: hidden;
+        }
+
+        /* خلفية الفيديو */
+        #bgVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .tools-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .tool-card {
+            background: rgba(0, 140, 255, 0.25);
+            backdrop-filter: blur(8px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 15px rgba(0, 140, 255, 0.4);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px #0099ff;
+        }
+
+        textarea, input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 15px;
+        }
+
+        button {
+            background: #0099ff;
+            border: none;
+            padding: 12px 20px;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 8px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0ab1ff;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- الخلفية -->
+<video autoplay muted loop id="bgVideo">
+    <source src="videos2/scanner-bg.mp4" type="video/mp4">
+</video>
+
+    <div class="tools-container">
+        <h2>🛠 Cyber Tools Suite</h2>
+
+        <!-- Password Generator -->
+        <div class="tool-card">
+            <h3>🔐 Password Generator</h3>
+            <input type="number" id="pwLength" placeholder="طول كلمة المرور">
+            <button onclick="generatePassword()">Generate</button>
+            <textarea id="generatedPw" rows="2" readonly></textarea>
+        </div>
+
+        <!-- Hash Identifier -->
+        <div class="tool-card">
+            <h3>🧬 Hash Identifier</h3>
+            <input type="text" id="hashInput" placeholder="أدخل Hash">
+            <button onclick="identifyHash()">Identify</button>
+            <textarea id="hashResult" rows="2" readonly></textarea>
+        </div>
+
+        <!-- Base64 -->
+        <div class="tool-card">
+            <h3>🅱 Base64 Encode / Decode</h3>
+            <textarea id="b64Input" rows="2" placeholder="أدخل نص"></textarea>
+            <button onclick="encodeBase64()">Encode</button>
+            <button onclick="decodeBase64()">Decode</button>
+            <textarea id="b64Output" rows="2" readonly></textarea>
+        </div>
+
+        <!-- URL Scanner -->
+        <div class="tool-card">
+            <h3>🌐 URL Scanner</h3>
+            <input type="text" id="urlInput" placeholder="أدخل رابط URL">
+            <button onclick="scanURL()">Scan</button>
+            <textarea id="urlResult" rows="2" readonly></textarea>
+        </div>
+
+        <!-- IP INFO LOOKUP -->
+        <div class="tool-card">
+            <h3>🌍 IP Info Lookup</h3>
+            <input type="text" id="ipInput" placeholder="Enter IP address">
+            <button onclick="lookupIP()">Lookup</button>
+            <textarea id="ipResult" rows="5" readonly></textarea>
+        </div>
+
+        <!-- Encryption -->
+        <div class="tool-card">
+            <h3>🔏 Text Encryption / Decryption</h3>
+            <textarea id="encInput" rows="2" placeholder="أدخل نص"></textarea>
+            <button onclick="encryptText()">Encrypt</button>
+            <button onclick="decryptText()">Decrypt</button>
+            <textarea id="encOutput" rows="2" readonly></textarea>
+        </div>
+
+    </div>
+
+<script>
+
+/* Password Generator */
+function generatePassword() {
+    let length = document.getElementById("pwLength").value;
+    let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+    let pw = "";
+    for (let i = 0; i < length; i++) {
+        pw += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    document.getElementById("generatedPw").value = pw;
+}
+
+/* Hash Identifier */
+function identifyHash() {
+    let hash = document.getElementById("hashInput").value.trim();
+    let result = "";
+
+    const hashTypes = [
+        { regex: /^[a-f0-9]{32}$/i, name: "MD5" },
+        { regex: /^[a-f0-9]{40}$/i, name: "SHA-1" },
+        { regex: /^[a-f0-9]{56}$/i, name: "SHA-224" },
+        { regex: /^[a-f0-9]{64}$/i, name: "SHA-256" }
+    ];
+
+    for (let type of hashTypes) {
+        if (type.regex.test(hash)) {
+            result = type.name;
+            break;
+        }
+    }
+
+    if (!result) result = "❌ غير معروف — أو ليس Hash صحيح";
+
+    document.getElementById("hashResult").value = result;
+}
+
+/* Base64 */
+function encodeBase64() {
+    document.getElementById("b64Output").value =
+        btoa(document.getElementById("b64Input").value);
+}
+function decodeBase64() {
+    document.getElementById("b64Output").value =
+        atob(document.getElementById("b64Input").value);
+}
+
+/* URL Scanner */
+function scanURL() {
+    let url = document.getElementById("urlInput").value;
+    document.getElementById("urlResult").value =
+        url.startsWith("https")
+            ? "🔒 آمن (HTTPS)"
+            : "⚠ غير آمن (HTTP)";
+}
+
+/* IP Lookup */
+async function lookupIP() {
+    let ip = document.getElementById("ipInput").value;
+
+    let res = await fetch("http://localhost:5000/ipinfo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ip: ip })
+    });
+
+    let data = await res.json();
+
+    document.getElementById("ipResult").value =
+        `Country: ${data.country}\nCity: ${data.city}\nISP: ${data.isp}`;
+}
+
+/* Encryption */
+function encryptText() {
+    document.getElementById("encOutput").value =
+        btoa(document.getElementById("encInput").value);
+}
+function decryptText() {
+    document.getElementById("encOutput").value =
+        atob(document.getElementById("encInput").value);
+}
+
+</script>
+
+</body>
+</html>

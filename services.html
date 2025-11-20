@@ -1,0 +1,129 @@
+<!DOCTYPE 
+html
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyber Security Services</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: Arial;
+            color: white;
+        }
+
+        /* خلفية الفيديو اقدر اغير بس انا ابي كذا*/
+        #bgVideoServices {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .container {
+            width: 50%;
+            margin: 140px auto;
+            text-align: center;
+        }
+
+        button {
+            width: 100%;
+            padding: 18px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 8px;
+            background: rgba(0, 140, 255, 0.35);
+            backdrop-filter: blur(6px);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        button:hover {
+            background: rgba(0, 140, 255, 0.55);
+        }
+    </style>
+
+</head>
+<body>
+
+    <!--  قسم الخلفية -->
+    <video autoplay muted loop id="bgVideoServices">
+        <source src="videos2/scanner-bg.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <h1>🛡 Cyber Security Tools</h1>
+
+        <button onclick="location.href='Scanner.html'">🔍 Network Scanner</button>
+
+        <button onclick="location.href='Tools.html'"> Cyber Tools</button>
+
+        <button onclick="location.href='Honeypot.html'">🛡 Honeypot Attack Monitor</button>
+
+         <button onclick="location.href='Malware.html'">🛠 Malware Analyzer</button> 
+
+        <button onclick="location.href='password.html'">🔐 Password Strength Checker</button>
+    </div>
+    <!-- ===== Disclaimer Section ===== -->
+<div style="
+    margin: 40px auto;
+    padding: 18px;
+    width: 85%;
+    color: white;
+    font-size: 13px;
+    line-height: 1.7;
+    background: rgba(0,0,0,0.40);
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.25);
+">
+
+    <h3 style="color:white; text-align:center;">⚠ تعليمات الاستخدام</h3>
+
+    <p>
+        هذا المشروع عبارة عن منصة تعليمية في مجال الأمن السيبراني، والغرض منه هو التعلم فقط وليس
+        الاستخدام في عمليات اختراق أو تجاوزات نظامية.
+    </p>
+
+    <b>تحذيرات مهمة:</b>
+    <ul>
+        <li>يُمنع تمامًا استخدام أدوات المشروع لفحص أي جهاز أو شبكة أو رابط أو عنوان IP لا تملك تصريحًا رسميًا لفحصه.</li>
+        <li>أدوات مثل Network Scanner – Honeypot Monitor – URL Malware Checker – File Malware Scanner قد تُعتبر اختبارات اختراق.</li>
+        <li>الفحص قد يتم تسجيله ضمن سجلات الشبكة (Logs) كعملية مسح Ports أو محاولة اتصال، وهذا قد يعرض المستخدم للمساءلة.</li>
+    </ul>
+
+    <b>تنويه:</b>
+    <ul>
+        <li>النتائج الظاهرة هي لأغراض تعليمية فقط وليست بديلًا عن فحوصات الأمان الاحترافية.</li>
+        <li>خدمة VirusTotal تُستخدم لفحص الروابط والملفات لكنها ليست بديلاً عن مختبرات تحليل البرمجيات الخبيثة.</li>
+    </ul>
+
+    <h3 style="color:white;">🔒 Usage Guidelines & Disclaimer (English)</h3>
+
+    <p>This project is an educational cybersecurity toolkit for learning purposes only.  
+    It must NOT be used for unauthorized penetration attempts or illegal activity.</p>
+
+    <b>Important Warnings:</b>
+    <ul>
+        <li>Do NOT scan any device, network, website, or IP without official authorization.</li>
+        <li>Scanning tools may be considered penetration-testing actions.</li>
+        <li>Unauthorized scanning can be logged and may have legal consequences.</li>
+    </ul>
+
+    <b>Cybersecurity Ethics:</b>
+    <ul>
+        <li>Use these tools to grow your skills — not to harm others.</li>
+        <li>Always respect privacy and security boundaries.</li>
+        <li>Learn ethically. Practice responsibly.</li>
+    </ul>
+</div>
+
+</body>
+</html>
