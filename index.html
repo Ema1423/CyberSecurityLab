@@ -6,29 +6,36 @@
     <title>Password Analyzer</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+
+<!-- خلفية الفيديو -->
 <video autoplay muted loop id="bgVideo">
     <source src="videos/first-section.mp4" type="video/mp4">
 </video>
-    <div class="container">
-        <nav class="menu">
+
+<!-- القائمة العلوية -->
+<nav class="menu">
     <a href="services.html">الخدمات</a>
     <a href="Scanner.html">فحص URL</a>
     <a href="Tools.html">أدوات الأمن</a>
     <a href="Honeypot.html">Honeypot</a>
     <a href="Malware.html">تحليل ملف / رابط</a>
 </nav>
-        <h2>🔐 Password Strength Analyzer</h2>
 
-        <input type="password" id="passwordInput" placeholder="اكتب كلمة المرور هنا">
-        
-        <div class="strength-bar">
-            <div id="strengthFill"></div>
-        </div>
+<!-- المحتوى -->
+<div class="container">
+    <h2>🔐 Password Strength Analyzer</h2>
 
-        <p id="strengthText"></p>
+    <input type="password" id="passwordInput" placeholder="اكتب كلمة المرور هنا">
+
+    <div class="strength-bar">
+        <div id="strengthFill"></div>
     </div>
 
-    <script src="script.js"></script>
+    <p id="strengthText"></p>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
